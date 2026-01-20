@@ -57,7 +57,6 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        console.log(email,password)
         if (!email || !password) {
             return res.status(400).json({
                 message: 'Email and password are required'
@@ -85,7 +84,7 @@ exports.login = async (req, res) => {
 
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
-            secure: true,
+            secure: false,
             sameSite: "lax",
             maxAge: 7 * 24 * 60 * 60 * 1000
         });
