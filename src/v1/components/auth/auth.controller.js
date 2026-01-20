@@ -9,14 +9,13 @@ const User = require('../users/users.model');
 exports.register = async (req, res) => {
     try {
         const { name, email, password, role } = req.body;
-        console.log(name, email, password, role)
         if (!name || !email || !password) {
             return res.status(400).json({
                 message: 'Name, email, and password are required'
             });
         }
 
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
         if (!passwordRegex.test(password)) {
             return res.status(400).json({
                 message:
@@ -58,7 +57,7 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
-
+        console.log(email,password)
         if (!email || !password) {
             return res.status(400).json({
                 message: 'Email and password are required'
